@@ -13,7 +13,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^7.0.0
-  fluttertoast: ^8.0.8
   http: ^0.13.1
   shimmer: ^2.0.0
 
