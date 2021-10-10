@@ -26,7 +26,7 @@ class PostComments extends StatelessWidget {
                 return const ShimmerPlaceHolder();
               } else if (state is PostDetailLoadSuccess) {
                 return ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: state.comments.length,
                   itemBuilder: (BuildContext context, int index) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../cubit/posts_cubit.dart';
 import '../../../cubit/post_detail_cubit.dart';
 import '../../../data/models/post.dart';
 

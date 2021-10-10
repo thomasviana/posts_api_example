@@ -37,9 +37,14 @@ class NetworkService {
 
   Future<bool> patchpost(Map<String, String> patchObj, int id) async {
     try {
-      await patch(Uri.parse(postsUrl + '/$id'), body: patchObj);
+      await patch(
+        Uri.parse(postsUrl + '/$id'),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      );
       return true;
-    } catch (e) {
+    } catch (error) {
       return false;
     }
   }
@@ -48,7 +53,7 @@ class NetworkService {
     try {
       await delete(Uri.parse(postsUrl + '/$id'));
       return true;
-    } catch (er) {
+    } catch (error) {
       return false;
     }
   }
@@ -57,7 +62,7 @@ class NetworkService {
     try {
       await delete(Uri.parse(postsUrl));
       return true;
-    } catch (er) {
+    } catch (error) {
       return false;
     }
   }

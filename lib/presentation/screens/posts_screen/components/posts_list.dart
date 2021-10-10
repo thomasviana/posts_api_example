@@ -18,7 +18,7 @@ class PostsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!posts.isEmpty) {
+    if (posts.isNotEmpty) {
       return Stack(alignment: Alignment.center, children: [
         ListView.separated(
           itemCount: posts.length,

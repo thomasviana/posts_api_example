@@ -48,7 +48,7 @@ class PostsScreen extends StatelessWidget {
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(height: 1),
                     itemBuilder: (BuildContext context, int index) {
-                      return ShimmerPlaceHolder();
+                      return const ShimmerPlaceHolder();
                     },
                   );
                 } else if (state is PostsInitial) {
