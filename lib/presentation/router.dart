@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:posts_api_example/cubit/segmented_control_cubit.dart';
+import '../cubit/segmented_control_cubit.dart';
 import '../data/repositories/posts_repository_impl.dart';
 
 import '../cubit/post_detail_cubit.dart';

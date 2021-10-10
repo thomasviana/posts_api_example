@@ -1,5 +1,5 @@
-import 'package:posts_api_example/data/models/comment.dart';
-import 'package:posts_api_example/data/models/user.dart';
+import '../models/comment.dart';
+import '../models/user.dart';
 
 import '../models/post.dart';
 

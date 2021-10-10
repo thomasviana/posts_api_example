@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:posts_api_example/cubit/posts_cubit.dart';
-import 'package:posts_api_example/data/models/post.dart';
-import 'package:posts_api_example/data/repositories/posts_repository.dart';
+import 'posts_cubit.dart';
+import '../data/repositories/posts_repository.dart';
 
 part 'segmented_control_state.dart';
 

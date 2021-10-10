@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:posts_api_example/presentation/screens/posts_screen/components/post_list_tile.dart';
+import 'post_list_tile.dart';
 
-import '../../../../cubit/post_detail_cubit.dart';
 import '../../../../cubit/posts_cubit.dart';
 import '../../../../data/models/post.dart';
 import '../../../widgets/rounded_button.dart';

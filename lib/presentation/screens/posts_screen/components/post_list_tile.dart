@@ -1,8 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:posts_api_example/cubit/posts_cubit.dart';
-import 'package:posts_api_example/data/models/post.dart';
+import '../../../../cubit/posts_cubit.dart';
+import '../../../../data/models/post.dart';
 
 class PostListTile extends StatelessWidget {
   final List<Post> posts;

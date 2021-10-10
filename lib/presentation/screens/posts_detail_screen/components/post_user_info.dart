@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:posts_api_example/presentation/widgets/shimmer_placeholder.dart';
-import 'package:shimmer/shimmer.dart';
-import '../../../../data/models/post.dart';
+import '../../../widgets/shimmer_placeholder.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:posts_api_example/cubit/post_detail_cubit.dart';
+import '../../../../cubit/post_detail_cubit.dart';
 
 class PostUserInfo extends StatelessWidget {
   @override

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import 'package:posts_api_example/cubit/segmented_control_cubit.dart';
-import 'package:posts_api_example/data/models/comment.dart';
-import 'package:posts_api_example/data/models/user.dart';
+import 'segmented_control_cubit.dart';
+import '../data/models/comment.dart';
+import '../data/models/user.dart';
 
 import '../data/models/post.dart';
 import '../data/repositories/posts_repository.dart';

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:posts_api_example/data/models/user.dart';
 
 class NetworkService {
   final postsUrl = 'https://jsonplaceholder.typicode.com/posts';
