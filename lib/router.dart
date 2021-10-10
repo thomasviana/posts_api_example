@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../data/models/post.dart';
-import 'screens/posts_detail_screen/post_detail_screen.dart';
-import 'screens/posts_screen/posts_screen.dart';
+import 'features/posts/data/models/post.dart';
+import 'features/posts/presentation/screens/posts_detail_screen/post_detail_screen.dart';
+import 'features/posts/presentation/screens/posts_screen/posts_screen.dart';
 
 class AppRouter {
   static const posts = '/';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'cubit/post_detail_cubit.dart';
-import 'presentation/router.dart';
-import 'cubit/posts_cubit.dart';
-import 'cubit/segmented_control_cubit.dart';
-import 'data/datasources/network_service.dart';
-import 'data/repositories/posts_repository_impl.dart';
+import 'features/posts/cubit/post_detail_cubit.dart';
+import 'features/posts/cubit/posts_cubit.dart';
+import 'features/posts/cubit/segmented_control_cubit.dart';
+import 'features/posts/data/datasources/network_service.dart';
+import 'features/posts/data/repositories/posts_repository_impl.dart';
+import 'router.dart';
 
 void main() {
   final repository = PostsRepositoryImpl(networkService: NetworkService());
