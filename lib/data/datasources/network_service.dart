@@ -52,4 +52,13 @@ class NetworkService {
       return false;
     }
   }
+
+  Future<bool> deleteAllPosts() async {
+    try {
+      await delete(Uri.parse(postsUrl));
+      return true;
+    } catch (er) {
+      return false;
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../cubit/posts_cubit.dart';
 import '../../../cubit/post_detail_cubit.dart';
 import '../../../data/models/post.dart';
 
@@ -17,7 +18,7 @@ class PostDetailScreen extends StatelessWidget {
 
     return BlocBuilder<PostDetailCubit, PostDetailState>(
       builder: (context, state) {
-        if (state is PostDetailEditSuccess) {
+        if (state is PostDetailLoadSuccess) {
           final _postEdited = state.post;
           buildContent(context, _postEdited);
         }
@@ -26,14 +27,14 @@ class PostDetailScreen extends StatelessWidget {
     );
   }
 
-  Scaffold buildContent(BuildContext context, Post _postEdited) {
+  Scaffold buildContent(BuildContext context, Post post) {
     return Scaffold(
       appBar: AppBar(title: const Text('Post'), actions: [
         IconButton(
           onPressed: () {
             BlocProvider.of<PostDetailCubit>(context).isFavorite(post);
           },
-          icon: _postEdited.isFavorite
+          icon: post.isFavorite
               ? const Icon(Icons.star_rate)
               : const Icon(Icons.star_outline),
         )
@@ -45,7 +46,7 @@ class PostDetailScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PostDescription(post: _postEdited),
+              PostDescription(post: post),
               PostUserInfo(),
               Flexible(child: PostComments()),
             ],

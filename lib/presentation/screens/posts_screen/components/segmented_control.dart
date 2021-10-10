@@ -37,7 +37,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
   CupertinoSlidingSegmentedControl<int> buildSegmentedControl(
       BuildContext context, int? index) {
     return CupertinoSlidingSegmentedControl(
-      thumbColor: Colors.green,
+      thumbColor: Theme.of(context).primaryColor,
       children: filterMenu,
       onValueChanged: (int? value) {
         _changePosition(value!);

@@ -7,6 +7,7 @@ part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
   final PostsRepository repository;
+
   late List<Post> _all;
 
   PostsCubit({required this.repository}) : super(PostsInitial());
@@ -74,6 +75,15 @@ class PostsCubit extends Cubit<PostsState> {
   }
 
   void clearAllPosts() {
-    emit(PostsInitial());
+    repository.deleteAllPosts().then((deleted) {
+      if (deleted) {
+        final currentState = state;
+        if (currentState is PostsLoadSuccess) {
+          final postList = currentState.posts;
+          postList.clear();
+          emit(PostsLoadSuccess(posts: postList));
+        }
+      }
+    });
   }
 }

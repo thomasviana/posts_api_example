@@ -8,6 +8,7 @@ abstract class PostsRepository {
   Future<bool> markAsReaded(bool isReaded, int id);
   Future<bool> isFavorite(bool isFavorite, int id);
   Future<bool> deletePost(int id);
+  Future<bool> deleteAllPosts();
   Future<List<Comment>> fetchPostDetails(int id);
   Future<User> fetchUserInfo(int id);
 }

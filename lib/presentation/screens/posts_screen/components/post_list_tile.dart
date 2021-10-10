@@ -28,11 +28,19 @@ class PostListTile extends StatelessWidget {
       ),
       key: Key(posts[index].id.toString()),
       child: ListTile(
+        minLeadingWidth: 20,
         leading: posts[index].isFavorite
-            ? const Icon(Icons.star_rate, color: Colors.yellow)
+            ? const Icon(
+                Icons.star_rate,
+                color: Color(0xFfFED230),
+              )
             : posts[index].isReaded
                 ? const Icon(Icons.circle, color: Colors.transparent)
-                : const Icon(Icons.circle, color: Colors.blue),
+                : const Icon(
+                    Icons.circle,
+                    color: Colors.blue,
+                    size: 15,
+                  ),
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Text(posts[index].title),

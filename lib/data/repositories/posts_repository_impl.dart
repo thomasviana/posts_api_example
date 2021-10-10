@@ -44,4 +44,9 @@ class PostsRepositoryImpl implements PostsRepository {
     final userData = await networkService.fetchUserInfo(userId);
     return User.fromJson(userData);
   }
+
+  @override
+  Future<bool> deleteAllPosts() async {
+    return await networkService.deleteAllPosts();
+  }
 }

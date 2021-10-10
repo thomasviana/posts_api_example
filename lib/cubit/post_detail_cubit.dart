@@ -29,7 +29,9 @@ class PostDetailCubit extends Cubit<PostDetailState> {
     emit(PostDetailLoadSuccess(post: post, comments: comments, user: user));
   }
 
-  void isFavorite(Post post) {
+  void isFavorite(Post post) async {
+    final comments = await repository.fetchPostDetails(post.id);
+    final user = await repository.fetchUserInfo(post.userId);
     repository.isFavorite(!post.isFavorite, post.id).then((isChanged) {
       if (isChanged) {
         post.isFavorite = !post.isFavorite;
@@ -38,15 +40,8 @@ class PostDetailCubit extends Cubit<PostDetailState> {
           postsCubit.showFavorites();
         }
         postsCubit.updatePostList();
-        emit(PostDetailEditSuccess(post: post));
+        emit(PostDetailLoadSuccess(post: post, comments: comments, user: user));
       }
     });
-  }
-
-  void updatePostDetail(Post post) {
-    final currentState = postsCubit.state;
-    if (currentState is PostsLoadSuccess) {
-      emit(PostDetailEditSuccess(post: post));
-    }
   }
 }

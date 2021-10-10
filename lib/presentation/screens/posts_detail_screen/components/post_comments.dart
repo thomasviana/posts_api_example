@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../cubit/post_detail_cubit.dart';
 import '../../../widgets/shimmer_placeholder.dart';
 

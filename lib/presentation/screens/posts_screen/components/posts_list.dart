@@ -18,27 +18,33 @@ class PostsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(alignment: Alignment.center, children: [
-      ListView.separated(
-        itemCount: posts.length,
-        separatorBuilder: (BuildContext context, int index) =>
-            const Divider(height: 1),
-        itemBuilder: (BuildContext context, int index) {
-          return PostListTile(
-            posts: posts,
-            index: index,
-          );
-        },
-      ),
-      Positioned(
-        bottom: 40,
-        //Delete All Button
-        child: RoundedButton(
-          onPressed: () {
-            BlocProvider.of<PostsCubit>(context).clearAllPosts();
+    if (!posts.isEmpty) {
+      return Stack(alignment: Alignment.center, children: [
+        ListView.separated(
+          itemCount: posts.length,
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(height: 1),
+          itemBuilder: (BuildContext context, int index) {
+            return PostListTile(
+              posts: posts,
+              index: index,
+            );
           },
         ),
-      ),
-    ]);
+        Positioned(
+          bottom: 40,
+          //Delete All Button
+          child: RoundedButton(
+            onPressed: () {
+              BlocProvider.of<PostsCubit>(context).clearAllPosts();
+            },
+          ),
+        ),
+      ]);
+    } else {
+      return const Center(
+        child: Text('No Posts'),
+      );
+    }
   }
 }
