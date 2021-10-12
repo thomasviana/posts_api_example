@@ -1,11 +1,22 @@
-class Post {
-  final int userId;
-  final int id;
-  late String title;
-  late String body;
-  late bool isFavorite;
-  late bool isReaded;
+import 'package:hive/hive.dart';
 
+part 'post.g.dart';
+
+@HiveType(typeId: 0)
+class Post extends HiveObject {
+  @HiveField(0)
+  final int userId;
+  @HiveField(1)
+  final int id;
+  @HiveField(2)
+  late String title;
+  @HiveField(3)
+  late String body;
+  @HiveField(4)
+  late bool isFavorite;
+  @HiveField(5)
+  late bool isReaded;
+  @HiveField(6)
   Post({
     required this.userId,
     required this.id,
@@ -29,5 +40,7 @@ class Post {
         'id': id,
         'title': title,
         'body': body,
+        'isFavorite': isFavorite.toString(),
+        'isReaded': isReaded.toString(),
       };
 }

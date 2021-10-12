@@ -1,13 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import 'segmented_control_cubit.dart';
 import '../data/models/comment.dart';
-import '../data/models/user.dart';
-
 import '../data/models/post.dart';
+import '../data/models/user.dart';
 import '../data/repositories/posts_repository.dart';
 import 'posts_cubit.dart';
+import 'segmented_control_cubit.dart';
 
 part 'post_detail_state.dart';
 
@@ -32,9 +31,8 @@ class PostDetailCubit extends Cubit<PostDetailState> {
   void isFavorite(Post post) async {
     final comments = await repository.fetchPostDetails(post.id);
     final user = await repository.fetchUserInfo(post.userId);
-    repository.isFavorite(!post.isFavorite, post.id).then((isChanged) {
+    repository.isFavorite(post).then((isChanged) {
       if (isChanged) {
-        post.isFavorite = !post.isFavorite;
         if (segmentedControlCubit.state
             is SegmentedControlSetFavoritesSuccess) {
           postsCubit.showFavorites();

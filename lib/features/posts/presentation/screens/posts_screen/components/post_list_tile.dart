@@ -53,7 +53,7 @@ class PostListTile extends StatelessWidget {
       ),
       confirmDismiss: (_) async {
         BlocProvider.of<PostsCubit>(context).deletePost(posts[index]);
-        return false;
+        return true;
       },
     );
   }

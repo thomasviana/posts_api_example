@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../data/repositories/posts_repository.dart';
+
 import '../data/models/post.dart';
+import '../data/repositories/posts_repository.dart';
 
 part 'posts_state.dart';
 
@@ -10,25 +11,20 @@ class PostsCubit extends Cubit<PostsState> {
 
   late List<Post> _all;
 
-  PostsCubit({required this.repository}) : super(PostsInitial());
+  PostsCubit(this.repository) : super(PostsInitial());
 
-  void fetchPosts() {
+  void fetchPosts({required bool refreshFromServer}) async {
     emit(PostsLoadInProgress());
-    repository.fetchPosts().then((posts) {
-      for (var post in posts) {
-        if (post.id <= 20) {
-          post.isReaded = false;
-        }
-      }
+    // await Future.delayed(const Duration(seconds: 1));
+    repository.fetchPosts(refreshFromServer).then((posts) {
       emit(PostsLoadSuccess(posts: posts));
       _all = posts;
     });
   }
 
   void markAsReaded(Post post) {
-    repository.markAsReaded(!post.isReaded, post.id).then((isChanged) {
+    repository.markAsReaded(!post.isReaded, post).then((isChanged) {
       if (isChanged) {
-        post.isReaded = true;
         updatePostList();
       }
     });
@@ -49,13 +45,6 @@ class PostsCubit extends Cubit<PostsState> {
       } else {
         emit(PostsLoadSuccess(posts: postList));
       }
-    }
-  }
-
-  void updatePostList() {
-    final currentState = state;
-    if (currentState is PostsLoadSuccess) {
-      emit(PostsLoadSuccess(posts: currentState.posts));
     }
   }
 
@@ -85,5 +74,12 @@ class PostsCubit extends Cubit<PostsState> {
         }
       }
     });
+  }
+
+  void updatePostList() {
+    final currentState = state;
+    if (currentState is PostsLoadSuccess) {
+      emit(PostsLoadSuccess(posts: currentState.posts));
+    }
   }
 }

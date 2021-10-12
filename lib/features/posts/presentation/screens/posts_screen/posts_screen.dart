@@ -1,24 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../cubit/posts_cubit.dart';
 import '../../../cubit/segmented_control_cubit.dart';
 import '../../widgets/shimmer_placeholder.dart';
-
 import 'components/posts_list.dart';
 import 'components/segmented_control.dart';
 
 class PostsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<PostsCubit>(context).fetchPosts();
+    BlocProvider.of<PostsCubit>(context).fetchPosts(refreshFromServer: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Posts'),
         actions: [
           IconButton(
             onPressed: () {
-              BlocProvider.of<PostsCubit>(context).fetchPosts();
+              BlocProvider.of<PostsCubit>(context)
+                  .fetchPosts(refreshFromServer: true);
               BlocProvider.of<SegmentedControlCubit>(context).reset();
             },
             icon: const Icon(

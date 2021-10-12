@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/shimmer_placeholder.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../cubit/post_detail_cubit.dart';
+import '../../../widgets/shimmer_placeholder.dart';
 
 class PostUserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('build');
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +21,6 @@ class PostUserInfo extends StatelessWidget {
           child: BlocBuilder<PostDetailCubit, PostDetailState>(
             builder: (context, state) {
               if (state is PostDetailLoadInProgress) {
-                print(state);
                 return const ShimmerPlaceHolder();
               } else if (state is PostDetailLoadSuccess) {
                 return Column(

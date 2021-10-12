@@ -1,52 +1,97 @@
-import '../models/comment.dart';
-import '../models/user.dart';
+import '../datasources/local_data_source.dart';
 
-import '../datasources/network_service.dart';
+import '../datasources/remote_data_source.dart';
+import '../models/comment.dart';
 import '../models/post.dart';
+import '../models/user.dart';
 import 'posts_repository.dart';
 
 class PostsRepositoryImpl implements PostsRepository {
-  final NetworkService networkService;
+  final RemoteDataSource remoteDataSource;
+  final LocalDataSource localDataSource;
 
-  PostsRepositoryImpl({required this.networkService});
-
-  @override
-  Future<List<Post>> fetchPosts() async {
-    final postsList = await networkService.fetchPosts();
-    return postsList.map((e) => Post.fromJson(e)).toList();
-  }
+  PostsRepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+  });
 
   @override
-  Future<bool> markAsReaded(bool completed, int id) async {
-    final patchObj = {'isReaded': completed.toString()};
-    return await networkService.patchpost(patchObj, id);
-  }
-
-  @override
-  Future<bool> isFavorite(bool completed, int id) async {
-    final patchObj = {'isfavorite': completed.toString()};
-    return await networkService.patchpost(patchObj, id);
-  }
-
-  @override
-  Future<bool> deletePost(int id) async {
-    return await networkService.deletePost(id);
+  Future<List<Post>> fetchPosts(bool refreshFromServer) async {
+    if (refreshFromServer) {
+      final remotePosts = await remoteDataSource.fetchPosts();
+      for (var post in remotePosts) {
+        if (post.id <= 20) {
+          post.isReaded = false;
+        }
+      }
+      await localDataSource.cacheAllPosts(remotePosts);
+      return remotePosts;
+    } else {
+      final cachedPosts = localDataSource.getCachedPosts();
+      if (cachedPosts!.isNotEmpty) {
+        return cachedPosts;
+      } else {
+        final remotePosts = await remoteDataSource.fetchPosts();
+        for (var post in remotePosts) {
+          if (post.id <= 20) {
+            post.isReaded = false;
+          }
+        }
+        await localDataSource.cacheAllPosts(remotePosts);
+        return remotePosts;
+      }
+    }
   }
 
   @override
   Future<List<Comment>> fetchPostDetails(int id) async {
-    final postDetail = await networkService.fetchPostComments(id);
-    return postDetail.map((e) => Comment.fromJson(e)).toList();
+    final cachedComments = localDataSource.getCachedComments(id);
+    if (cachedComments!.isNotEmpty) {
+      return cachedComments;
+    } else {
+      final remoteComments = await remoteDataSource.fetchPostComments(id);
+      await localDataSource.cacheAllComments(remoteComments, id);
+      return remoteComments;
+    }
   }
 
   @override
   Future<User> fetchUserInfo(int userId) async {
-    final userData = await networkService.fetchUserInfo(userId);
-    return User.fromJson(userData);
+    final cachedUserInfo = localDataSource.getCachedUserInfo(userId);
+    if (cachedUserInfo != null) {
+      print('cachedUserInfo');
+      return cachedUserInfo;
+    } else {
+      print('remoteUserInfo');
+      final remoteUserInfo = await remoteDataSource.fetchUserInfo(userId);
+      await localDataSource.cacheAllUserInfo(remoteUserInfo, userId);
+      return remoteUserInfo;
+    }
+  }
+
+  @override
+  Future<bool> markAsReaded(bool isReaded, Post post) async {
+    final patchObj = {'isReaded': isReaded.toString()};
+    localDataSource.markAsReaded(post);
+    return await remoteDataSource.patchPost(patchObj, post.id);
+  }
+
+  @override
+  Future<bool> isFavorite(Post post) async {
+    final patchObj = {'isFavorite': post.isFavorite.toString()};
+    localDataSource.isFavorite(post);
+    return await remoteDataSource.patchPost(patchObj, post.id);
   }
 
   @override
   Future<bool> deleteAllPosts() async {
-    return await networkService.deleteAllPosts();
+    localDataSource.deleteAllPosts();
+    return await remoteDataSource.deleteAllPosts();
+  }
+
+  @override
+  Future<bool> deletePost(int id) async {
+    localDataSource.deletePost(id);
+    return await remoteDataSource.deletePost(id);
   }
 }

@@ -8,8 +8,10 @@ class SegmentedControlCubit extends Cubit<SegmentedControlState> {
   final PostsRepository repository;
   final PostsCubit postsCubit;
 
-  SegmentedControlCubit(this.repository, this.postsCubit)
-      : super(
+  SegmentedControlCubit(
+    this.repository,
+    this.postsCubit,
+  ) : super(
           SegmentedControlInitial(),
         );
 

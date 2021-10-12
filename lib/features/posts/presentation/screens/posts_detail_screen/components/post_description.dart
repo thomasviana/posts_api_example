@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../data/models/post.dart';
 
 class PostDescription extends StatelessWidget {

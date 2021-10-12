@@ -18,15 +18,3 @@ class PostDetailLoadSuccess extends PostDetailState {
     required this.user,
   });
 }
-
-class PostDetailEditSuccess extends PostDetailState {
-  final Post post;
-  final List<Comment> comments;
-  final User user;
-
-  PostDetailEditSuccess({
-    required this.post,
-    required this.comments,
-    required this.user,
-  });
-}

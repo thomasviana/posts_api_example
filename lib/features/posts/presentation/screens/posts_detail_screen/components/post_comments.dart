@@ -7,8 +7,6 @@ import '../../../widgets/shimmer_placeholder.dart';
 class PostComments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('build');
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
