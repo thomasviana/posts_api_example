@@ -33,12 +33,14 @@ Hive is a third-party library that allows us to have local persistency data with
 2. ✅ Each Cell/Row height should fit according to the size of the content.
 3. ✅ The first 20 posts should have a blue dot indicator.
 4. ✅ Remove the blue dot indicator once the related post is read.
-5. ✅ Once a post is touched, its related content is shown in the main content area. 6. The related content also displays user information.
+5. ✅ Once a post is touched, its related content is shown in the main content area. 
+6. ✅ The related content also displays user information.
 7. ✅ Add a button in the navigation. It adds the current post to favorites.
 8. ✅ Each cell should have the functionality to swipe and delete the post.
 9. ✅ Add a button to the footer that removes all posts.
 10. ✅ Add a button to navigation that reloads all posts.
-11. ✅ Add a segmented control to filter posts (All / Favorites) 12. Favorite posts should have a star indicator.
+11. ✅ Add a segmented control to filter posts (All / Favorites) 
+12. ✅ Favorite posts should have a star indicator.
 
 #### Extra requirements:
 
