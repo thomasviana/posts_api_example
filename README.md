@@ -19,3 +19,13 @@ The UI send functions to the cubit, then the cubit goes to the repository and as
 This is a feature driven design, so if you want to implement an autentication feature, you can work on it without touching the other folders. 
 
 I used some third-party libraries like flutter_bloc for sure to implement the cubits, http for networking, and shimmer wich i like to have nice UX while loading data. 
+
+#### What's next?
+
+- Implement get_it package for dependency injection.
+
+- Implement hive for local storage.
+
+- Unit testing.
+
+
